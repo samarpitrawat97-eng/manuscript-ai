@@ -115,8 +115,7 @@ The system is intentionally human-in-the-loop. AI-generated readings are not aut
 - Hibernate
 - H2 Database
 - Maven
-- Lombok
-
+- 
 ### Frontend
 
 - React
