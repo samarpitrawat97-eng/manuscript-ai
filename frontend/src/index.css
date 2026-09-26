@@ -1,10 +1,20 @@
 @import "tailwindcss";
 
-/* Standard CSS fallback to ensure the "Dabba" looks good immediately */
+@theme {
+  --color-background: #090806;
+  --color-secondary: #11100f;
+  --color-gold: #d7a84b;
+  --color-goldLight: #f0c76a;
+  --color-parchment: #f3ead2;
+  --color-redInk: #b33a32;
+  --color-textMain: #f5efe4;
+}
+
+/* Global body styling */
 body {
   margin: 0;
-  background-color: #090806; /* background */
-  color: #F5EFE4;            /* textMain */
+  background-color: #090806;
+  color: #F5EFE4;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -13,9 +23,11 @@ body {
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background: #090806;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(215, 168, 75, 0.3);
   border-radius: 10px;
