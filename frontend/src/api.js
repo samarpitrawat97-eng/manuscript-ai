@@ -1,6 +1,6 @@
 const API_BASE_URL = 'http://localhost:8080/api';
 
-export async function analyzeManuscript(file, onProgress) {
+export async function analyzeManuscript(file, onProgress, signal) {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -9,6 +9,7 @@ export async function analyzeManuscript(file, onProgress) {
         {
             method: 'POST',
             body: formData,
+            signal,
         }
     );
 
@@ -88,25 +89,32 @@ export async function analyzeManuscript(file, onProgress) {
         }
     };
 
-    while (true) {
-        const { value, done } = await reader.read();
+    try {
+        while (true) {
+            const { value, done } = await reader.read();
 
-        if (done) {
-            break;
+            if (done) {
+                break;
+            }
+
+            buffer += decoder.decode(value, { stream: true });
+
+            const events = buffer.split(/\r?\n\r?\n/);
+
+            buffer = events.pop() ?? '';
+
+            for (const event of events) {
+                processEvent(event);
+            }
         }
 
-        buffer += decoder.decode(value, { stream: true });
-
-        const events = buffer.split(/\r?\n\r?\n/);
-        buffer = events.pop() ?? '';
-
-        for (const event of events) {
-            processEvent(event);
+        if (buffer.trim()) {
+            processEvent(buffer);
         }
-    }
-
-    if (buffer.trim()) {
-        processEvent(buffer);
+    } finally {
+        // Release the stream reader on completion, cancellation, or
+        // parse failure so the connection is not left dangling.
+        reader.cancel().catch(() => {});
     }
 
     if (!result) {
