@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     BookOpen,
     Brain,
@@ -9,7 +10,9 @@ import {
     Database,
 } from 'lucide-react';
 
-export default function AboutPage({ onNavigate }) {
+export default function AboutPage() {
+    const navigate = useNavigate();
+
     return (
         <div className="pt-32 px-8 max-w-7xl mx-auto pb-24">
 
@@ -234,7 +237,7 @@ export default function AboutPage({ onNavigate }) {
                 </p>
 
                 <button
-                    onClick={() => onNavigate('dashboard')}
+                    onClick={() => navigate('/dashboard')}
                     className="px-8 py-4 bg-gold text-background font-black rounded-full text-xs uppercase tracking-widest hover:bg-goldLight transition-all"
                 >
                     Digitize a Manuscript

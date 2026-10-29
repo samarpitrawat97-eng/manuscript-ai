@@ -1,14 +1,16 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Book } from 'lucide-react';
 
-export default function Navbar({ onNavigate }) {
+export default function Navbar() {
+    const navigate = useNavigate();
+
     return (
         <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-white/5 px-8 py-4 flex justify-between items-center">
 
             {/* Logo */}
             <div
                 className="flex items-center gap-3 cursor-pointer"
-                onClick={() => onNavigate('landing')}
+                onClick={() => navigate('/')}
             >
                 <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(215,168,75,0.3)]">
                     <Book
@@ -32,28 +34,28 @@ export default function Navbar({ onNavigate }) {
             <div className="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-white/50">
 
                 <button
-                    onClick={() => onNavigate('landing')}
+                    onClick={() => navigate('/')}
                     className="hover:text-gold transition-colors"
                 >
                     Home
                 </button>
 
                 <button
-                    onClick={() => onNavigate('dashboard')}
+                    onClick={() => navigate('/dashboard')}
                     className="hover:text-gold transition-colors"
                 >
                     Digitize
                 </button>
 
                 <button
-                    onClick={() => onNavigate('dashboard')}
+                    onClick={() => navigate('/dashboard')}
                     className="hover:text-gold transition-colors"
                 >
                     Archive
                 </button>
 
                 <button
-                    onClick={() => onNavigate('about')}
+                    onClick={() => navigate('/about')}
                     className="hover:text-gold transition-colors"
                 >
                     About
@@ -63,7 +65,7 @@ export default function Navbar({ onNavigate }) {
 
             {/* Try Demo */}
             <button
-                onClick={() => onNavigate('dashboard')}
+                onClick={() => navigate('/dashboard')}
                 className="px-6 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-gold hover:text-background transition-all"
             >
                 TRY DEMO

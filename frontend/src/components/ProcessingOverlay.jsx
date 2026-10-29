@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Loader2, X } from 'lucide-react';
 
@@ -72,6 +71,17 @@ export default function ProcessingOverlay({
                         );
                     })}
                 </div>
+
+                {!error && (
+                    <div className="mt-8 flex justify-center">
+                        <button
+                            onClick={onCancel}
+                            className="px-4 py-2 rounded-lg bg-white/10 text-xs font-bold hover:bg-white/20"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
 
                 {error && (
                     <div className="mt-8 p-4 rounded-xl border border-redInk/30 bg-redInk/10">
